@@ -1,0 +1,5 @@
+.vscode/
+config/init.php
+src/users/
+src/classes_no/
+src/classes/PHPMailer/
