@@ -14,7 +14,7 @@ class MappingController {
 
   public function setHeader($header){
     $this->header = $header;
-    $this->sortHeader(); // remove if you don't want sorting
+    //$this->sortHeader(); // remove if you don't want sorting
   }
   public function setDataset($dataset){
     $this->dataset = $dataset;
