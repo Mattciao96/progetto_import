@@ -1,100 +1,224 @@
 {
-  "location": [
-    {
-      "name": "locality",
-      "moderna": "",
-      "rilievi": ["Sito", "Località"],
-      "dts": ""
-    },
-    {
-      "name": "habitat",
-      "moderna": "",
-      "rilievi": "Habitat originale",
-      "dts": ""
-    },
-    {
-      "name": "country",
-      "moderna": "",
-      "rilievi": "",
-      "dts": ""
-    },
-    {
-      "name": "countryCode",
-      "moderna": "",
-      "rilievi": "",
-      "dts": ""
-    },
-    {
-      "name": "stateProvince",
-      "moderna": "",
-      "rilievi": "Regione",
-      "dts": ""
-    },
-    {
-      "name": "county",
-      "moderna": "",
-      "rilievi": "Provincia",
-      "dts": ""
-    },
-    {
-      "name": "dem_elevation",
-      "moderna": "",
-      "rilievi": "Quota_DEM",
-      "dts": ""
-    },
-    {
-      "name": "verbatimElevation",
-      "moderna": "",
-      "rilievi": "Quota (m slm)",
-      "dts": ""
-    },
-    {
-      "name": "decimalLatitude",
-      "moderna": "",
-      "rilievi": "WGS84_N",
-      "dts": ""
-    },
-    {
-      "name": "decimalLongitude",
-      "moderna": "",
-      "rilievi": "WGS84_E",
-      "dts": ""
-    },
-    {
-      "name": "geodeticDatum",
-      "moderna": "",
-      "rilievi": "",
-      "dts": ""
-    },
-    {
-      "name": "coordinatesUncertaintyInMeters",
-      "moderna": "",
-      "rilievi": "Incertezza m",
-      "dts": ""
-    },
-    {
-      "name": "georeferenceRemarks",
-      "moderna": "",
-      "rilievi": "",
-      "dts": ""
-    },
-    {
-      "name": "coordinates_attribution",
-      "moderna": "",
-      "rilievi": "Modalità di attribuzione delle coordinate",
-      "dts": ""
-    },
-    {
-      "name": "belt",
-      "moderna": "",
-      "rilievi": "",
-      "dts": ""
-    },
-    {
-      "name": "id_plot",
-      "moderna": "",
-      "rilievi": "id plot",
-      "dts": ""
-    }
-  ]
-}
+    "location": [
+      {
+        "name": "locality",
+        "moderna": "Località originale",
+        "rilievi": ["Sito", "Località"],
+        "dts": "Località originale"
+      },
+      {
+        "name": "habitat",
+        "moderna": "Habitat originale",
+        "rilievi": "Habitat originale",
+        "dts": "Habitat originale"
+      },
+      {
+        "name": "country",
+        "moderna": "",
+        "rilievi": "",
+        "dts": ""
+      },
+      {
+        "name": "countryCode",
+        "moderna": "",
+        "rilievi": "",
+        "dts": ""
+      },
+      {
+        "name": "stateProvince",
+        "moderna": "",
+        "rilievi": "Regione",
+        "dts": ""
+      },
+      {
+        "name": "county",
+        "moderna": "",
+        "rilievi": "Provincia",
+        "dts": ""
+      },
+      {
+        "name": "dem_elevation",
+        "moderna": "Quota_DEM",
+        "rilievi": "Quota_DEM",
+        "dts": "Quota_DEM"
+      },
+      {
+        "name": "verbatimElevation",
+        "moderna": "Altitudine",
+        "rilievi": "Quota (m slm)",
+        "dts": "Altitudine"
+      },
+      {
+        "name": "decimalLatitude",
+        "moderna": "DECIMAL_y",
+        "rilievi": "WGS84_N",
+        "dts": "DECIMAL_y"
+      },
+      {
+        "name": "decimalLongitude",
+        "moderna": "DECIMAL_x",
+        "rilievi": "WGS84_E",
+        "dts": "DECIMAL_x"
+      },
+      {
+        "name": "geodeticDatum",
+        "moderna": "",
+        "rilievi": "",
+        "dts": ""
+      },
+      {
+        "name": "coordinatesUncertaintyInMeters",
+        "moderna": "Incertezza",
+        "rilievi": "Incertezza m",
+        "dts": "Incertezza"
+      },
+      {
+        "name": "georeferenceRemarks",
+        "moderna": "Note di georeferenziazione",
+        "rilievi": "",
+        "dts": "Note di georeferenziazione"
+      },
+      {
+        "name": "coordinates_attribution",
+        "moderna": "Attribuzione coordinate",
+        "rilievi": "Modalità di attribuzione delle coordinate",
+        "dts": "Attribuzione coordinate"
+      },
+      {
+        "name": "belt",
+        "moderna": "Fascia",
+        "rilievi": "",
+        "dts": "Fascia"
+      },
+      {
+        "name": "id_plot",
+        "moderna": "",
+        "rilievi": "id plot",
+        "dts": ""
+      }
+    ],
+    "record" : [
+        {
+            "name": "id_record",
+            "moderna": "ID",
+            "rilievi": "",
+            "dts": "idn"
+          },
+          {
+            "name": "verbatimIdentification",
+            "moderna": "Nome originale",
+            "rilievi": "Nome originale",
+            "dts": "Nome originale"
+          },
+          {
+            "name": "scientificName",
+            "moderna": "Nome corrente",
+            "rilievi": "Nome corrente",
+            "dts": "Nome corrente"
+          },
+          {
+            "name": "verbatim_substratum",
+            "moderna": "Substrato originale",
+            "rilievi": "Substrato originale",
+            "dts": "Substrato originale"
+          },
+          {
+            "name": "substratum",
+            "moderna": "Substrato",
+            "rilievi": "Substrato",
+            "dts": "Substrato"
+          },
+          {
+            "name": "specific_substratum",
+            "moderna": ["Forofita","Roccia madre"],
+            "rilievi": ["Litologia","Specie arborea"],
+            "dts": ["Forofita","Roccia madre"]
+          },
+          {
+            "name": "recordedBy",
+            "moderna": "Legit",
+            "rilievi": "",
+            "dts": "Legit"
+          },
+          {
+            "name": "identifiedBy",
+            "moderna": "Determinavit",
+            "rilievi": "",
+            "dts": "Determinavit"
+          },
+          {
+            "name": "verbatimEventDate",
+            "moderna": "Data",
+            "rilievi": "Data",
+            "dts": "Data"
+          },
+          {
+            "name": "eventDate",
+            "moderna": "",
+            "rilievi": "",
+            "dts": ""
+          },
+          {
+            "name": "year",
+            "moderna": "Anno",
+            "rilievi": "Periodo",
+            "dts": "Anno"
+          },
+          {
+            "name": "century",
+            "moderna": "Secolo",
+            "rilievi": "Secolo",
+            "dts": "Secolo"
+          }
+    ],
+    "source" : [
+        {
+            "name": "id_source",
+            "moderna": "",
+            "rilievi": "",
+            "dts": ""
+          },
+          {
+            "name": "source_type",
+            "moderna": "",
+            "rilievi": "",
+            "dts": ""
+          },
+          {
+            "name": "short_title",
+            "moderna": "Fonte abbreviata",
+            "rilievi": "Fonte bibliografica abbreviata",
+            "dts": "Fonte"
+          },  
+          {
+            "name": "associatedReferences",
+            "moderna": "",
+            "rilievi": "",
+            "dts": ""
+          },
+          {
+            "name": "source_title",
+            "moderna": "",
+            "rilievi": "",
+            "dts": ""
+          },
+          {
+            "name": "author",
+            "moderna": "",
+            "rilievi": "",
+            "dts": ""
+          },
+          {
+            "name": "source_year",
+            "moderna": "",
+            "rilievi": "",
+            "dts": ""
+          },
+          {
+            "name": "source_century",
+            "moderna": "",
+            "rilievi": "",
+            "dts": ""
+          }
+    ]
+  }

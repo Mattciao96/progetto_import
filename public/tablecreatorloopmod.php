@@ -13,9 +13,9 @@ include('functions.php');
 $mysqli = new mysqli($database_adress, $database_login, $database_password, $database_name);
 
 
-# partiamo dalla tabella rilievi
+# partiamo dalla tabella moderna
 // 0 parte bonus, converti le date se queste sono un numero grezzo di excel
-$query = "SELECT DISTINCT Data FROM rilievi WHERE Data IS NOT NULL";
+$query = "SELECT DISTINCT Data FROM moderna WHERE Data IS NOT NULL";
 $result = $mysqli->query($query);
 
 $arrayResult = [];
@@ -32,7 +32,7 @@ foreach ($arrayResult as $string) {
     if ($string > 2023) {
       $string = date('d/m/Y', strtotime('1900-01-01 +' . ($string - 2) . ' days'));
 
-      $query = "UPDATE rilievi SET Data = '{$mysqli->real_escape_string($string)}' WHERE Data LIKE '{$mysqli->real_escape_string($stringa)}'";
+      $query = "UPDATE moderna SET Data = '{$mysqli->real_escape_string($string)}' WHERE Data LIKE '{$mysqli->real_escape_string($stringa)}'";
       echo $query;
 
       $result = $mysqli->query($query);
@@ -46,31 +46,9 @@ foreach ($arrayResult as $string) {
 }
 
 
-// 1: controlla se esiste la colonna rilievi, altrimenti creala e inserisci numeri autoincrementali
-echo 'RILIEVI______________________________________________________________________________________<br><br>';
+// 1: controlla se esiste la colonna moderna, altrimenti creala e inserisci numeri autoincrementali
+echo 'moderna______________________________________________________________________________________<br><br>';
 
-
-
-
-$query = "SHOW COLUMNS FROM rilievi LIKE 'id_rilievi'";
-$result = $mysqli->query($query);
-if ($result) {
-  echo 'Colonne lette<br>';
-} else {
-  echo $mysqli->error . '<br>';
-}
-
-if ($result->num_rows == 0) {
-  $query = "ALTER TABLE rilievi ADD COLUMN id_rilievi INT AUTO_INCREMENT PRIMARY KEY FIRST";
-  $result = $mysqli->query($query);
-  if ($result) {
-    echo 'La nuova colonna è stata creata con successo<br>';
-  } else {
-    echo $mysqli->error . '<br>';
-  }
-} else {
-  echo 'La colonna id_rilievi esiste già<br>';
-}
 
 // 2: seleziono le colonne che devo portare in location
 
@@ -97,7 +75,7 @@ $columnsData = $jsonData['location'];
 
 
 
-$query = "SELECT * FROM rilievi";
+$query = "SELECT * FROM moderna";
 $result = $mysqli->query($query);
 $arrayResult = [];
 if ($result->num_rows > 0) {
@@ -106,20 +84,20 @@ if ($result->num_rows > 0) {
   }
 }
 
-/* $columnsInRilievi = array_column($columnsData, 'rilievi');
-//$columnsTest = array_merge($columnsInRilievi);
-$columnsInRilievi = array_flatten($columnsInRilievi, array());
+/* $columnsInmoderna = array_column($columnsData, 'moderna');
+//$columnsTest = array_merge($columnsInmoderna);
+$columnsInmoderna = array_flatten($columnsInmoderna, array());
  */
 
 //$arrayResult = $arrayResult[1247];
 //$query = 'SELECT id_location FROM location WHERE ';
 
-/* foreach ($columnsInRilievi as $column) {
+/* foreach ($columnsInmoderna as $column) {
   
 } */
 
 // parte di test
-// abbiamo arrayresult la prima riga di rilievi $arrayResult 
+// abbiamo arrayresult la prima riga di moderna $arrayResult 
 // 
 //$columnsData = $columnsData[0];
 /* echo '<pre>';
@@ -134,13 +112,13 @@ echo '<pre>';
 
 
 
-$arrayResults = $arrayResult;
+//$arrayResults = $arrayResult;
 
 // !!! discommenta per testare
-/* $arrayResults = [$arrayResult[0]];
+$arrayResults = [$arrayResult[0]];
 echo '<pre>';
 print_r($arrayResults);
-echo '<pre>'; */
+echo '<pre>';
 
 foreach ($arrayResults as $arrayResult) {
 
@@ -148,25 +126,29 @@ foreach ($arrayResults as $arrayResult) {
 
   
   $columnsData = $jsonData['location'];
+  echo '<pre>';
+  print_r($columnsData);
+  echo '<pre>';
+  
   $query = 'SELECT id_location FROM location WHERE ';
   foreach ($columnsData as $column) {
 
     
     // Questo serve a gestire il caso in cui devo unire 2 valori in un' unica nuova colonna
-    if (is_array($column['rilievi'])) {
+    if (is_array($column['moderna'])) {
 
-      $stringToSearch = mergeStringValues($arrayResult, $column['rilievi'], '; ');
+      $stringToSearch = mergeStringValues($arrayResult, $column['moderna'], '; ');
     } else {
-      if ($column['rilievi'] == '') {
+      if ($column['moderna'] == '') {
         $stringToSearch = '';
       } else {
-        $stringToSearch = $arrayResult[$column['rilievi']];
-        //echo $arrayResult[$column['rilievi']].'<br>';
+        $stringToSearch = $arrayResult[$column['moderna']];
+        //echo $arrayResult[$column['moderna']].'<br>';
       }
     }
 
 
-    if ($stringToSearch == '' or $column['rilievi'] == '') {
+    if ($stringToSearch == '' or $column['moderna'] == '') {
       $query .= "{$mysqli->real_escape_string($column['name'])} IS NULL";
     } else {
       $query .= "{$mysqli->real_escape_string($column['name'])} LIKE '{$mysqli->real_escape_string($stringToSearch)}'";
@@ -200,20 +182,20 @@ foreach ($arrayResults as $arrayResult) {
     foreach ($columnsData as $column) {
 
       // Questo serve a gestire il caso in cui devo unire 2 valori in un' unica nuova colonna
-      if (is_array($column['rilievi'])) {
+      if (is_array($column['moderna'])) {
 
-        $stringToSearch = mergeStringValues($arrayResult, $column['rilievi'], '; ');
+        $stringToSearch = mergeStringValues($arrayResult, $column['moderna'], '; ');
       } else {
-        if ($column['rilievi'] == '') {
+        if ($column['moderna'] == '') {
           $stringToSearch = '';
         } else {
-          $stringToSearch = $arrayResult[$column['rilievi']];
-          //echo $arrayResult[$column['rilievi']].'<br>';
+          $stringToSearch = $arrayResult[$column['moderna']];
+          //echo $arrayResult[$column['moderna']].'<br>';
         }
       }
 
 
-      if ($stringToSearch == '' or $column['rilievi'] == '') {
+      if ($stringToSearch == '' or $column['moderna'] == '') {
 
         //$query .= "{$mysqli->real_escape_string($column['name'])} IS NULL";
         $queryInto .= "{$mysqli->real_escape_string($column['name'])}";
@@ -259,20 +241,20 @@ foreach ($arrayResults as $arrayResult) {
   foreach ($columnsData as $column) {
 
     // Questo serve a gestire il caso in cui devo unire 2 valori in un' unica nuova colonna
-    if (is_array($column['rilievi'])) {
+    if (is_array($column['moderna'])) {
 
-      $stringToSearch = mergeStringValues($arrayResult, $column['rilievi'], '; ');
+      $stringToSearch = mergeStringValues($arrayResult, $column['moderna'], '; ');
     } else {
-      if ($column['rilievi'] == '') {
+      if ($column['moderna'] == '') {
         $stringToSearch = '';
       } else {
-        $stringToSearch = $arrayResult[$column['rilievi']];
-        //echo $arrayResult[$column['rilievi']].'<br>';
+        $stringToSearch = $arrayResult[$column['moderna']];
+        //echo $arrayResult[$column['moderna']].'<br>';
       }
     }
 
 
-    if ($stringToSearch == '' or $column['rilievi'] == '') {
+    if ($stringToSearch == '' or $column['moderna'] == '') {
 
       //$query .= "{$mysqli->real_escape_string($column['name'])} IS NULL";
       $queryInto .= "{$mysqli->real_escape_string($column['name'])}";
@@ -313,7 +295,7 @@ foreach ($arrayResults as $arrayResult) {
 
 
 
-/* $query = "SELECT * FROM rilievi";
+/* $query = "SELECT * FROM moderna";
 $result = $mysqli->query($query);
 
 $arrayResult = [];
