@@ -111,7 +111,7 @@ if ($result->num_rows > 0) {
 $columnsInRilievi = array_flatten($columnsInRilievi, array());
  */
 
-$arrayResult = $arrayResult[1247];
+//$arrayResult = $arrayResult[1247];
 $query = 'SELECT id_location FROM location WHERE ';
 
 /* foreach ($columnsInRilievi as $column) {
@@ -122,60 +122,26 @@ $query = 'SELECT id_location FROM location WHERE ';
 // abbiamo arrayresult la prima riga di rilievi $arrayResult 
 // 
 //$columnsData = $columnsData[0];
-echo '<pre>';
+/* echo '<pre>';
 print_r($columnsData);
 echo '<pre>';
 echo '<pre>';
 print_r($arrayResult);
 echo '<pre>';
-
+ */
 // caso in cui non ci sono poblemi
 //
+$arrayResults = $arrayResult;
 
-foreach ($columnsData as $column) {
-
-
-  // Questo serve a gestire il caso in cui devo unire 2 valori in un' unica nuova colonna
-  if (is_array($column['rilievi'])) {
-
-    $stringToSearch = mergeStringValues($arrayResult, $column['rilievi'], '; ');
-  } else {
-    if ($column['rilievi'] == '') {
-      $stringToSearch = '';
-    } else {
-      $stringToSearch = $arrayResult[$column['rilievi']];
-      //echo $arrayResult[$column['rilievi']].'<br>';
-    }
-  }
-
-
-  if ($stringToSearch == '' or $column['rilievi'] == '') {
-    $query .= "{$mysqli->real_escape_string($column['name'])} IS NULL";
-  } else {
-    $query .= "{$mysqli->real_escape_string($column['name'])} LIKE '{$mysqli->real_escape_string($stringToSearch)}'";
-  }
-
-  $query .= ' AND ';
-}
-$query = substr($query, 0, -4);
-echo $query;
-
-$result = $mysqli->query($query);
+foreach ($arrayResults as $arrayResult) {
 
 
 
-/* **************************************************************************************************************************************** */
-
-
-if ($result->num_rows == 0) {
-  $query = 'INSERT INTO location ';
-  $queryInto = '(';
-  $queryValues = ' VALUES (';
-  echo '<br>';
-
+  
 
   foreach ($columnsData as $column) {
 
+    $query = 'SELECT id_location FROM location WHERE ';
     // Questo serve a gestire il caso in cui devo unire 2 valori in un' unica nuova colonna
     if (is_array($column['rilievi'])) {
 
@@ -191,37 +157,85 @@ if ($result->num_rows == 0) {
 
 
     if ($stringToSearch == '' or $column['rilievi'] == '') {
-
-      //$query .= "{$mysqli->real_escape_string($column['name'])} IS NULL";
-      $queryInto .= "{$mysqli->real_escape_string($column['name'])}";
-      $queryValues .= 'NULL';
+      $query .= "{$mysqli->real_escape_string($column['name'])} IS NULL";
     } else {
-      //$query .= "{$mysqli->real_escape_string($column['name'])} LIKE '{$mysqli->real_escape_string($stringToSearch)}'";
-      $queryInto .= "{$mysqli->real_escape_string($column['name'])}";
-      $queryValues .= "'{$mysqli->real_escape_string($stringToSearch)}'";
+      $query .= "{$mysqli->real_escape_string($column['name'])} LIKE '{$mysqli->real_escape_string($stringToSearch)}'";
     }
 
-    $queryInto .= ', ';
-    $queryValues .= ', ';
+    $query .= ' AND ';
   }
+  $query = substr($query, 0, -4);
+  //echo $query;
 
-
-  $queryInto = substr($queryInto, 0, -2);
-  $queryInto .= ')';
-  $queryValues = substr($queryValues, 0, -2);
-  $queryValues .= ')';
-
-  $query = $query . $queryInto . $queryValues;
-  //echo $query; // !!! guarda qua per vedere la query insert
   $result = $mysqli->query($query);
-      if ($result) {
-        print_r(mysqli_insert_id($mysqli));
+  if ($result) {
+  } else {
+    echo 'Select errore: ' . $mysqli->error . '<br>';
+  }
+  
+
+
+
+
+  /* **************************************************************************************************************************************** */
+
+
+  if ($result->num_rows == 0) {
+    $query = 'INSERT INTO location ';
+    $queryInto = '(';
+    $queryValues = ' VALUES (';
+    echo '<br>';
+
+
+    foreach ($columnsData as $column) {
+
+      // Questo serve a gestire il caso in cui devo unire 2 valori in un' unica nuova colonna
+      if (is_array($column['rilievi'])) {
+
+        $stringToSearch = mergeStringValues($arrayResult, $column['rilievi'], '; ');
       } else {
-        echo 'Insert errore: '.$mysqli->error . '<br>';
+        if ($column['rilievi'] == '') {
+          $stringToSearch = '';
+        } else {
+          $stringToSearch = $arrayResult[$column['rilievi']];
+          //echo $arrayResult[$column['rilievi']].'<br>';
+        }
       }
 
-} else {
-  print_r($result->fetch_assoc());
+
+      if ($stringToSearch == '' or $column['rilievi'] == '') {
+
+        //$query .= "{$mysqli->real_escape_string($column['name'])} IS NULL";
+        $queryInto .= "{$mysqli->real_escape_string($column['name'])}";
+        $queryValues .= 'NULL';
+      } else {
+        //$query .= "{$mysqli->real_escape_string($column['name'])} LIKE '{$mysqli->real_escape_string($stringToSearch)}'";
+        $queryInto .= "{$mysqli->real_escape_string($column['name'])}";
+        $queryValues .= "'{$mysqli->real_escape_string($stringToSearch)}'";
+      }
+
+      $queryInto .= ', ';
+      $queryValues .= ', ';
+    }
+
+
+    $queryInto = substr($queryInto, 0, -2);
+    $queryInto .= ')';
+    $queryValues = substr($queryValues, 0, -2);
+    $queryValues .= ')';
+
+    $query = $query . $queryInto . $queryValues;
+    echo $query; // !!! guarda qua per vedere la query insert
+    $result = $mysqli->query($query);
+    if ($result) {
+      //print_r(mysqli_insert_id($mysqli));
+    } else {
+      echo 'Insert errore: ' . $mysqli->error . '<br>';
+    }
+  } else {
+    //print_r($result->fetch_assoc());
+  }
+
 }
 
 
