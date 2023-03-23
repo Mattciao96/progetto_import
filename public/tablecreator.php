@@ -139,28 +139,25 @@ foreach ($columnsData as $column) {
   if (is_array($column['rilievi'])) {
 
     $stringToSearch = mergeStringValues($arrayResult, $column['rilievi'], '; ');
-
-
-    if ($stringToSearch == '') {
-      $query .= "{$mysqli->real_escape_string($column['name'])} IS NULL";
-    } {
-      $query .= "{$mysqli->real_escape_string($column['name'])} LIKE '{$mysqli->real_escape_string($stringToSearch)}'";
-    }
   } else {
-
-    if (
-      $column['rilievi'] == '' or
-      $arrayResult[$column['rilievi']] == ''
-    ) {
-      $query .= "{$mysqli->real_escape_string($column['name'])} IS NULL";
+    if ($column['rilievi'] == '') {
+      $stringToSearch = '';
     } else {
-      $query .= "{$mysqli->real_escape_string($column['name'])} LIKE '{$mysqli->real_escape_string($arrayResult[$column['rilievi']])}'";
+      $stringToSearch = $arrayResult[$column['rilievi']];
+      //echo $arrayResult[$column['rilievi']].'<br>';
     }
   }
 
-  $query.= ' AND ';
+
+  if ($stringToSearch == '' or $column['rilievi'] == '') {
+    $query .= "{$mysqli->real_escape_string($column['name'])} IS NULL";
+  } else {
+    $query .= "{$mysqli->real_escape_string($column['name'])} LIKE '{$mysqli->real_escape_string($stringToSearch)}'";
+  }
+
+  $query .= ' AND ';
 }
-$query = substr($query , 0, -4);
+$query = substr($query, 0, -4);
 echo $query;
 
 $result = $mysqli->query($query);
@@ -168,48 +165,57 @@ $result = $mysqli->query($query);
 
 
 /* **************************************************************************************************************************************** */
-/* 
+
 $query = 'INSERT INTO location ';
 $queryInto = '(';
-$queryValues = '(';  
+$queryValues = ' VALUES (';  
+echo '<br>';
 if ($result->num_rows == 0) {
 
 
   foreach ($columnsData as $column) {
 
+  // Questo serve a gestire il caso in cui devo unire 2 valori in un' unica nuova colonna
+  if (is_array($column['rilievi'])) {
 
-    // Questo serve a gestire il caso in cui devo unire 2 valori in un' unica nuova colonna
-    if (is_array($column['rilievi'])) {
-  
-      $stringToSearch = mergeStringValues($arrayResult, $column['rilievi'], '; ');
-  
-  
-      if ($stringToSearch == '') {
-        $query .= "{$mysqli->real_escape_string($column['name'])} IS NULL";
-        $queryInto = '(';
-        $queryValues = '('; 
-      } {
-        $query .= "{$mysqli->real_escape_string($column['name'])} LIKE '{$mysqli->real_escape_string($stringToSearch)}'";
-      }
+    $stringToSearch = mergeStringValues($arrayResult, $column['rilievi'], '; ');
+  } else {
+    if ($column['rilievi'] == '') {
+      $stringToSearch = '';
     } else {
-  
-      if (
-        $column['rilievi'] == '' or
-        $arrayResult[$column['rilievi']] == ''
-      ) {
-        $query .= "{$mysqli->real_escape_string($column['name'])} IS NULL";
-      } else {
-        $query .= "{$mysqli->real_escape_string($column['name'])} LIKE '{$mysqli->real_escape_string($arrayResult[$column['rilievi']])}'";
-      }
+      $stringToSearch = $arrayResult[$column['rilievi']];
+      //echo $arrayResult[$column['rilievi']].'<br>';
     }
-  
-    $query.= ' AND ';
   }
-  $query = substr($query , 0, -4);
-  echo $query;
+
+
+  if ($stringToSearch == '' or $column['rilievi'] == '') {
+  
+    //$query .= "{$mysqli->real_escape_string($column['name'])} IS NULL";
+    $queryInto .= "{$mysqli->real_escape_string($column['name'])}";
+    $queryValues .= 'NULL'; 
+  } else {
+    //$query .= "{$mysqli->real_escape_string($column['name'])} LIKE '{$mysqli->real_escape_string($stringToSearch)}'";
+    $queryInto .= "{$mysqli->real_escape_string($column['name'])}";
+    $queryValues .= "'{$mysqli->real_escape_string($stringToSearch)}'"; 
+  }
+
+  $queryInto .= ', ';
+  $queryValues .= ', ';  
 }
 
- */
+
+$queryInto = substr($queryInto, 0, -2);
+$queryInto .= ')';
+$queryValues = substr($queryValues, 0, -2);
+$queryValues .= ')';
+
+$query = $query.$queryInto.$queryValues;
+echo $query;
+} else {
+  print_r($result->fetch_assoc());
+}
+
 
 
 
