@@ -1,0 +1,100 @@
+{
+  "location": [
+    {
+      "name": "locality",
+      "moderna": "",
+      "rilievi": ["Sito", "Località"],
+      "dts": ""
+    },
+    {
+      "name": "habitat",
+      "moderna": "",
+      "rilievi": "Habitat originale",
+      "dts": ""
+    },
+    {
+      "name": "country",
+      "moderna": "",
+      "rilievi": "",
+      "dts": ""
+    },
+    {
+      "name": "countryCode",
+      "moderna": "",
+      "rilievi": "",
+      "dts": ""
+    },
+    {
+      "name": "stateProvince",
+      "moderna": "",
+      "rilievi": "Regione",
+      "dts": ""
+    },
+    {
+      "name": "county",
+      "moderna": "",
+      "rilievi": "Provincia",
+      "dts": ""
+    },
+    {
+      "name": "dem_elevation",
+      "moderna": "",
+      "rilievi": "Quota_DEM",
+      "dts": ""
+    },
+    {
+      "name": "verbatimElevation",
+      "moderna": "",
+      "rilievi": "Quota (m slm)",
+      "dts": ""
+    },
+    {
+      "name": "decimalLatitude",
+      "moderna": "",
+      "rilievi": "WGS84_N",
+      "dts": ""
+    },
+    {
+      "name": "decimalLongitude",
+      "moderna": "",
+      "rilievi": "WGS84_E",
+      "dts": ""
+    },
+    {
+      "name": "geodeticDatum",
+      "moderna": "",
+      "rilievi": "",
+      "dts": ""
+    },
+    {
+      "name": "coordinatesUncertaintyInMeters",
+      "moderna": "",
+      "rilievi": "Incertezza m",
+      "dts": ""
+    },
+    {
+      "name": "georeferenceRemarks",
+      "moderna": "",
+      "rilievi": "",
+      "dts": ""
+    },
+    {
+      "name": "coordinates_attribution",
+      "moderna": "",
+      "rilievi": "Modalità di attribuzione delle coordinate",
+      "dts": ""
+    },
+    {
+      "name": "belt",
+      "moderna": "",
+      "rilievi": "",
+      "dts": ""
+    },
+    {
+      "name": "id_plot",
+      "moderna": "",
+      "rilievi": "id plot",
+      "dts": ""
+    }
+  ]
+}
