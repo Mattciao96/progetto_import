@@ -39,7 +39,7 @@ function mergeStringValues($rowContent, $columnsToMerge, $separator)
 // $separator
 function prepareString($rowContent, $columnName, $separator)
 {
-  if (is_array($rowContent)) {
+  if (is_array($columnName)) {
 
     $stringToSearch = mergeStringValues($rowContent, $columnName, $separator);
   } else {

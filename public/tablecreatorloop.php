@@ -146,14 +146,14 @@ foreach ($arrayResults as $arrayResult) {
 
 
 
-  
+
   $columnsData = $jsonData['location'];
   $query = 'SELECT id_location FROM location WHERE ';
   foreach ($columnsData as $column) {
 
-    
+
     // Questo serve a gestire il caso in cui devo unire 2 valori in un' unica nuova colonna
-    if (is_array($column['rilievi'])) {
+    /* if (is_array($column['rilievi'])) {
 
       $stringToSearch = mergeStringValues($arrayResult, $column['rilievi'], '; ');
     } else {
@@ -163,7 +163,10 @@ foreach ($arrayResults as $arrayResult) {
         $stringToSearch = $arrayResult[$column['rilievi']];
         //echo $arrayResult[$column['rilievi']].'<br>';
       }
-    }
+    } */
+
+    $stringToSearch = prepareString($arrayResult, $column['rilievi'], isset($column['separator']) ? $column['separator'] : '');
+
 
 
     if ($stringToSearch == '' or $column['rilievi'] == '') {
@@ -182,7 +185,7 @@ foreach ($arrayResults as $arrayResult) {
   } else {
     echo 'Select errore: ' . $mysqli->error . '<br>';
   }
-  
+
 
 
 
@@ -200,17 +203,8 @@ foreach ($arrayResults as $arrayResult) {
     foreach ($columnsData as $column) {
 
       // Questo serve a gestire il caso in cui devo unire 2 valori in un' unica nuova colonna
-      if (is_array($column['rilievi'])) {
+      $stringToSearch = prepareString($arrayResult, $column['rilievi'], isset($column['separator']) ? $column['separator'] : '');
 
-        $stringToSearch = mergeStringValues($arrayResult, $column['rilievi'], '; ');
-      } else {
-        if ($column['rilievi'] == '') {
-          $stringToSearch = '';
-        } else {
-          $stringToSearch = $arrayResult[$column['rilievi']];
-          //echo $arrayResult[$column['rilievi']].'<br>';
-        }
-      }
 
 
       if ($stringToSearch == '' or $column['rilievi'] == '') {
@@ -238,7 +232,7 @@ foreach ($arrayResults as $arrayResult) {
     //echo $query; // !!! guarda qua per vedere la query insert
     $result = $mysqli->query($query);
     if ($result) {
-      $locationId =(mysqli_insert_id($mysqli));
+      $locationId = (mysqli_insert_id($mysqli));
     } else {
       echo 'Insert errore: ' . $mysqli->error . '<br>';
     }
@@ -248,28 +242,31 @@ foreach ($arrayResults as $arrayResult) {
 
   //echo $locationId.'<br>';
 
-  /**************************************************************************************************************************************************************/ 
+  /**************************************************************************************************************************************************************/
+  // !!! prendi source_id
+  /**************************************************************************************************************************************************************/
+  $columnsData = $jsonData['source'][2];
+
+  $query = "SELECT id_source from source WHERE short_source LIKE '{$mysqli->real_escape_string($arrayResult[$columnsData['rilievi']])}'";
+  
+  $result = $mysqli->query($query);
+  $sourceId = $result->fetch_assoc()['id_source'];
+
+  /**************************************************************************************************************************************************************/
+  // !!! inserisci in record
+  /**************************************************************************************************************************************************************/
 
   // PROVIAMO A INSERIRE
   $columnsData = $jsonData['record'];
 
   $query = 'INSERT INTO record ';
-    $queryInto = '(';
-    $queryValues = ' VALUES (';
+  $queryInto = '(';
+  $queryValues = ' VALUES (';
   foreach ($columnsData as $column) {
 
     // Questo serve a gestire il caso in cui devo unire 2 valori in un' unica nuova colonna
-    if (is_array($column['rilievi'])) {
+    $stringToSearch = prepareString($arrayResult, $column['rilievi'], isset($column['separator']) ? $column['separator'] : '');
 
-      $stringToSearch = mergeStringValues($arrayResult, $column['rilievi'], '; ');
-    } else {
-      if ($column['rilievi'] == '') {
-        $stringToSearch = '';
-      } else {
-        $stringToSearch = $arrayResult[$column['rilievi']];
-        //echo $arrayResult[$column['rilievi']].'<br>';
-      }
-    }
 
 
     if ($stringToSearch == '' or $column['rilievi'] == '') {
@@ -289,23 +286,19 @@ foreach ($arrayResults as $arrayResult) {
 
 
   $queryInto = substr($queryInto, 0, -2);
-  $queryInto .= ", {$mysqli->real_escape_string('id_location')})";
+  $queryInto .= ", {$mysqli->real_escape_string('id_location')}";
+  $queryInto .= ", {$mysqli->real_escape_string('id_source')})";
   $queryValues = substr($queryValues, 0, -2);
-  $queryValues .= ", {$mysqli->real_escape_string($locationId)})";
+  $queryValues .= ", {$mysqli->real_escape_string($locationId)}";
+  $queryValues .= ", {$mysqli->real_escape_string($sourceId)})";
 
   $query = $query . $queryInto . $queryValues;
   //echo $query; // !!! guarda qua per vedere la query insert
   $result = $mysqli->query($query);
   if ($result) {
-
   } else {
     echo 'Insert errore: ' . $mysqli->error . '<br>';
   }
-  
-
-
-
-
 }
 
 
