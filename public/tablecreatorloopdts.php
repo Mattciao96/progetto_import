@@ -13,9 +13,9 @@ include('functions.php');
 $mysqli = new mysqli($database_adress, $database_login, $database_password, $database_name);
 
 
-# partiamo dalla tabella moderna
+# partiamo dalla tabella dts
 // 0 parte bonus, converti le date se queste sono un numero grezzo di excel
-$query = "SELECT DISTINCT Data FROM moderna WHERE Data IS NOT NULL";
+$query = "SELECT DISTINCT Data FROM dts WHERE Data IS NOT NULL";
 $result = $mysqli->query($query);
 
 $arrayResult = [];
@@ -32,7 +32,7 @@ foreach ($arrayResult as $string) {
     if ($string > 2023) {
       $string = date('d/m/Y', strtotime('1900-01-01 +' . ($string - 2) . ' days'));
 
-      $query = "UPDATE moderna SET Data = '{$mysqli->real_escape_string($string)}' WHERE Data LIKE '{$mysqli->real_escape_string($stringa)}'";
+      $query = "UPDATE dts SET Data = '{$mysqli->real_escape_string($string)}' WHERE Data LIKE '{$mysqli->real_escape_string($stringa)}'";
       echo $query;
 
       $result = $mysqli->query($query);
@@ -46,8 +46,8 @@ foreach ($arrayResult as $string) {
 }
 
 
-// 1: controlla se esiste la colonna moderna, altrimenti creala e inserisci numeri autoincrementali
-echo 'moderna______________________________________________________________________________________<br><br>';
+// 1: controlla se esiste la colonna dts, altrimenti creala e inserisci numeri autoincrementali
+echo 'dts______________________________________________________________________________________<br><br>';
 
 
 
@@ -76,7 +76,7 @@ $columnsData = $jsonData['location'];
 
 
 
-$query = "SELECT * FROM moderna";
+$query = "SELECT * FROM dts";
 $result = $mysqli->query($query);
 $arrayResult = [];
 if ($result->num_rows > 0) {
@@ -85,20 +85,20 @@ if ($result->num_rows > 0) {
   }
 }
 
-/* $columnsInmoderna = array_column($columnsData, 'moderna');
-//$columnsTest = array_merge($columnsInmoderna);
-$columnsInmoderna = array_flatten($columnsInmoderna, array());
+/* $columnsIndts = array_column($columnsData, 'dts');
+//$columnsTest = array_merge($columnsIndts);
+$columnsIndts = array_flatten($columnsIndts, array());
  */
 
 //$arrayResult = $arrayResult[1247];
 //$query = 'SELECT id_location FROM location WHERE ';
 
-/* foreach ($columnsInmoderna as $column) {
+/* foreach ($columnsIndts as $column) {
   
 } */
 
 // parte di test
-// abbiamo arrayresult la prima riga di moderna $arrayResult 
+// abbiamo arrayresult la prima riga di dts $arrayResult 
 // 
 //$columnsData = $columnsData[0];
 /* echo '<pre>';
@@ -132,23 +132,23 @@ foreach ($arrayResults as $arrayResult) {
 
 
     // Questo serve a gestire il caso in cui devo unire 2 valori in un' unica nuova colonna
-    /* if (is_array($column['moderna'])) {
+    /* if (is_array($column['dts'])) {
 
-      $stringToSearch = mergeStringValues($arrayResult, $column['moderna'], '; ');
+      $stringToSearch = mergeStringValues($arrayResult, $column['dts'], '; ');
     } else {
-      if ($column['moderna'] == '') {
+      if ($column['dts'] == '') {
         $stringToSearch = '';
       } else {
-        $stringToSearch = $arrayResult[$column['moderna']];
-        //echo $arrayResult[$column['moderna']].'<br>';
+        $stringToSearch = $arrayResult[$column['dts']];
+        //echo $arrayResult[$column['dts']].'<br>';
       }
     } */
 
-    $stringToSearch = prepareString($arrayResult, $column['moderna'], isset($column['separator']) ? $column['separator'] : '');
+    $stringToSearch = prepareString($arrayResult, $column['dts'], isset($column['separator']) ? $column['separator'] : '');
 
 
 
-    if ($stringToSearch == '' or $column['moderna'] == '') {
+    if ($stringToSearch == '' or $column['dts'] == '') {
       $query .= "{$mysqli->real_escape_string($column['name'])} IS NULL";
     } else {
       $query .= "{$mysqli->real_escape_string($column['name'])} LIKE '{$mysqli->real_escape_string($stringToSearch)}'";
@@ -182,11 +182,11 @@ foreach ($arrayResults as $arrayResult) {
     foreach ($columnsData as $column) {
 
       // Questo serve a gestire il caso in cui devo unire 2 valori in un' unica nuova colonna
-      $stringToSearch = prepareString($arrayResult, $column['moderna'], isset($column['separator']) ? $column['separator'] : '');
+      $stringToSearch = prepareString($arrayResult, $column['dts'], isset($column['separator']) ? $column['separator'] : '');
 
 
 
-      if ($stringToSearch == '' or $column['moderna'] == '') {
+      if ($stringToSearch == '' or $column['dts'] == '') {
 
         //$query .= "{$mysqli->real_escape_string($column['name'])} IS NULL";
         $queryInto .= "{$mysqli->real_escape_string($column['name'])}";
@@ -226,7 +226,7 @@ foreach ($arrayResults as $arrayResult) {
   /**************************************************************************************************************************************************************/
   $columnsData = $jsonData['source'][2];
 
-  $query = "SELECT id_source from source WHERE short_source LIKE '{$mysqli->real_escape_string($arrayResult[$columnsData['moderna']])}'";
+  $query = "SELECT id_source from source WHERE short_source LIKE '{$mysqli->real_escape_string($arrayResult[$columnsData['dts']])}'";
   
   $result = $mysqli->query($query);
   if ($result) {
@@ -234,7 +234,7 @@ foreach ($arrayResults as $arrayResult) {
     if (isset($sourceIdProvvisorio['id_source'])) {
       $sourceId = $sourceIdProvvisorio['id_source'];
     } else {
-      echo 'In source non esiste ' .$arrayResult[$columnsData['moderna']].'<br><br>';
+      echo 'In source non esiste ' .$arrayResult[$columnsData['dts']].'<br><br>';
       $sourceId = '';
     }
   } else {
@@ -255,11 +255,11 @@ foreach ($arrayResults as $arrayResult) {
   foreach ($columnsData as $column) {
 
     // Questo serve a gestire il caso in cui devo unire 2 valori in un' unica nuova colonna
-    $stringToSearch = prepareString($arrayResult, $column['moderna'], isset($column['separator']) ? $column['separator'] : '');
+    $stringToSearch = prepareString($arrayResult, $column['dts'], isset($column['separator']) ? $column['separator'] : '');
 
 
 
-    if ($stringToSearch == '' or $column['moderna'] == '') {
+    if ($stringToSearch == '' or $column['dts'] == '') {
 
       //$query .= "{$mysqli->real_escape_string($column['name'])} IS NULL";
       $queryInto .= "{$mysqli->real_escape_string($column['name'])}";

@@ -248,9 +248,19 @@ foreach ($arrayResults as $arrayResult) {
   $columnsData = $jsonData['source'][2];
 
   $query = "SELECT id_source from source WHERE short_source LIKE '{$mysqli->real_escape_string($arrayResult[$columnsData['rilievi']])}'";
-  
+
   $result = $mysqli->query($query);
-  $sourceId = $result->fetch_assoc()['id_source'];
+  if ($result) {
+    $sourceIdProvvisorio = $result->fetch_assoc();
+    if (isset($sourceIdProvvisorio['id_source'])) {
+      $sourceId = $sourceIdProvvisorio['id_source'];
+    } else {
+      echo 'In source non esiste ' . $arrayResult[$columnsData['rilievi']] . '<br><br>';
+      $sourceId = '';
+    }
+  } else {
+    echo 'Insert errore: ' . $mysqli->error . '<br>';
+  }
 
   /**************************************************************************************************************************************************************/
   // !!! inserisci in record
@@ -290,7 +300,11 @@ foreach ($arrayResults as $arrayResult) {
   $queryInto .= ", {$mysqli->real_escape_string('id_source')})";
   $queryValues = substr($queryValues, 0, -2);
   $queryValues .= ", {$mysqli->real_escape_string($locationId)}";
-  $queryValues .= ", {$mysqli->real_escape_string($sourceId)})";
+  if ($sourceId == '') {
+    $queryValues .= ", NULL)";
+  } else {
+    $queryValues .= ", {$mysqli->real_escape_string($sourceId)})";
+  }
 
   $query = $query . $queryInto . $queryValues;
   //echo $query; // !!! guarda qua per vedere la query insert
