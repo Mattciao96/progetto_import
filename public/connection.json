@@ -4,7 +4,8 @@
         "name": "locality",
         "moderna": "Località originale",
         "rilievi": ["Sito", "Località"],
-        "dts": "Località originale"
+        "dts": "Località originale",
+        "separator": "; "
       },
       {
         "name": "habitat",
@@ -126,7 +127,8 @@
             "name": "specific_substratum",
             "moderna": ["Forofita","Roccia madre"],
             "rilievi": ["Litologia","Specie arborea"],
-            "dts": ["Forofita","Roccia madre"]
+            "dts": ["Forofita","Roccia madre"],
+            "separator": "; "
           },
           {
             "name": "recordedBy",
