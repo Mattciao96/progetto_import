@@ -112,13 +112,13 @@ echo '<pre>';
 
 
 
-//$arrayResults = $arrayResult;
+$arrayResults = $arrayResult;
 
 // !!! discommenta per testare
-$arrayResults = [$arrayResult[0]];
+/* $arrayResults = [$arrayResult[0]];
 echo '<pre>';
 print_r($arrayResults);
-echo '<pre>';
+echo '<pre>'; */
 
 foreach ($arrayResults as $arrayResult) {
 
@@ -126,9 +126,9 @@ foreach ($arrayResults as $arrayResult) {
 
   
   $columnsData = $jsonData['location'];
-  echo '<pre>';
+  /* echo '<pre>';
   print_r($columnsData);
-  echo '<pre>';
+  echo '<pre>'; */
   
   $query = 'SELECT id_location FROM location WHERE ';
   foreach ($columnsData as $column) {

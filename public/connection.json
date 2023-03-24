@@ -98,12 +98,6 @@
       }
     ],
     "record" : [
-        {
-            "name": "id_record",
-            "moderna": "ID",
-            "rilievi": "",
-            "dts": "idn"
-          },
           {
             "name": "verbatimIdentification",
             "moderna": "Nome originale",
