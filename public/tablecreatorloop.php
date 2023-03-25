@@ -74,17 +74,6 @@ if ($result->num_rows == 0) {
 
 // 2: seleziono le colonne che devo portare in location
 
-/* $query = "SELECT 
-WGS84_E as decimalLongitude,
-WGS84_N as decimalLatitude,
-Località
-Habitat originale as habitat,
-Incertezza m
-Quota_dem as
-,  FROM table_name"; */
-
-
-
 $jsonData = file_get_contents('connection.json');
 $jsonData = json_decode($jsonData, true);
 
@@ -106,75 +95,29 @@ if ($result->num_rows > 0) {
   }
 }
 
-/* $columnsInRilievi = array_column($columnsData, 'rilievi');
-//$columnsTest = array_merge($columnsInRilievi);
-$columnsInRilievi = array_flatten($columnsInRilievi, array());
- */
-
-//$arrayResult = $arrayResult[1247];
-//$query = 'SELECT id_location FROM location WHERE ';
-
-/* foreach ($columnsInRilievi as $column) {
-  
-} */
-
-// parte di test
-// abbiamo arrayresult la prima riga di rilievi $arrayResult 
-// 
-//$columnsData = $columnsData[0];
-/* echo '<pre>';
-print_r($columnsData);
-echo '<pre>';
-echo '<pre>';
-print_r($arrayResult);
-echo '<pre>';
- */
-// caso in cui non ci sono poblemi
-//
-
-
-
 $arrayResults = $arrayResult;
 
 // !!! discommenta per testare
-/* $arrayResults = [$arrayResult[0]];
+$arrayResults = [$arrayResult[0]];
 echo '<pre>';
 print_r($arrayResults);
-echo '<pre>'; */
+echo '<pre>';
+echo '<pre>';
+print_r($columnsData);
+echo '<pre>';
+
+$tables = ['rilievi', 'moderna', 'dts'];
 
 foreach ($arrayResults as $arrayResult) {
 
 
-
-
   $columnsData = $jsonData['location'];
   $query = 'SELECT id_location FROM location WHERE ';
+
   foreach ($columnsData as $column) {
 
-
-    // Questo serve a gestire il caso in cui devo unire 2 valori in un' unica nuova colonna
-    /* if (is_array($column['rilievi'])) {
-
-      $stringToSearch = mergeStringValues($arrayResult, $column['rilievi'], '; ');
-    } else {
-      if ($column['rilievi'] == '') {
-        $stringToSearch = '';
-      } else {
-        $stringToSearch = $arrayResult[$column['rilievi']];
-        //echo $arrayResult[$column['rilievi']].'<br>';
-      }
-    } */
-
-    $stringToSearch = prepareString($arrayResult, $column['rilievi'], isset($column['separator']) ? $column['separator'] : '');
-
-
-
-    if ($stringToSearch == '' or $column['rilievi'] == '') {
-      $query .= "{$mysqli->real_escape_string($column['name'])} IS NULL";
-    } else {
-      $query .= "{$mysqli->real_escape_string($column['name'])} LIKE '{$mysqli->real_escape_string($stringToSearch)}'";
-    }
-
+    $stringToSearch = prepareString($arrayResult, $column, 'rilievi', isset($column['separator']) ? $column['separator'] : '');
+    $query .= addToSelectString($mysqli, $stringToSearch, $column, 'rilievi');
     $query .= ' AND ';
   }
   $query = substr($query, 0, -4);
@@ -185,10 +128,6 @@ foreach ($arrayResults as $arrayResult) {
   } else {
     echo 'Select errore: ' . $mysqli->error . '<br>';
   }
-
-
-
-
 
   /* **************************************************************************************************************************************** */
 
@@ -203,20 +142,11 @@ foreach ($arrayResults as $arrayResult) {
     foreach ($columnsData as $column) {
 
       // Questo serve a gestire il caso in cui devo unire 2 valori in un' unica nuova colonna
-      $stringToSearch = prepareString($arrayResult, $column['rilievi'], isset($column['separator']) ? $column['separator'] : '');
+      $stringToSearch = prepareString($arrayResult, $column, 'rilievi', isset($column['separator']) ? $column['separator'] : '');
 
-
-
-      if ($stringToSearch == '' or $column['rilievi'] == '') {
-
-        //$query .= "{$mysqli->real_escape_string($column['name'])} IS NULL";
-        $queryInto .= "{$mysqli->real_escape_string($column['name'])}";
-        $queryValues .= 'NULL';
-      } else {
-        //$query .= "{$mysqli->real_escape_string($column['name'])} LIKE '{$mysqli->real_escape_string($stringToSearch)}'";
-        $queryInto .= "{$mysqli->real_escape_string($column['name'])}";
-        $queryValues .= "'{$mysqli->real_escape_string($stringToSearch)}'";
-      }
+      $queryParts = addToInsertString($mysqli, $stringToSearch, $column, 'rilievi');
+      $queryInto .= $queryParts[0];
+      $queryValues .= $queryParts[1];
 
       $queryInto .= ', ';
       $queryValues .= ', ';
@@ -275,20 +205,11 @@ foreach ($arrayResults as $arrayResult) {
   foreach ($columnsData as $column) {
 
     // Questo serve a gestire il caso in cui devo unire 2 valori in un' unica nuova colonna
-    $stringToSearch = prepareString($arrayResult, $column['rilievi'], isset($column['separator']) ? $column['separator'] : '');
+    $stringToSearch = prepareString($arrayResult, $column, 'rilievi', isset($column['separator']) ? $column['separator'] : '');
 
-
-
-    if ($stringToSearch == '' or $column['rilievi'] == '') {
-
-      //$query .= "{$mysqli->real_escape_string($column['name'])} IS NULL";
-      $queryInto .= "{$mysqli->real_escape_string($column['name'])}";
-      $queryValues .= 'NULL';
-    } else {
-      //$query .= "{$mysqli->real_escape_string($column['name'])} LIKE '{$mysqli->real_escape_string($stringToSearch)}'";
-      $queryInto .= "{$mysqli->real_escape_string($column['name'])}";
-      $queryValues .= "'{$mysqli->real_escape_string($stringToSearch)}'";
-    }
+    $queryParts = addToInsertString($mysqli, $stringToSearch, $column, 'rilievi');
+    $queryInto .= $queryParts[0];
+    $queryValues .= $queryParts[1];
 
     $queryInto .= ', ';
     $queryValues .= ', ';
@@ -314,21 +235,3 @@ foreach ($arrayResults as $arrayResult) {
     echo 'Insert errore: ' . $mysqli->error . '<br>';
   }
 }
-
-
-
-
-
-
-/* $query = "SELECT * FROM rilievi";
-$result = $mysqli->query($query);
-
-$arrayResult = [];
-if ($result->num_rows > 0) {
-  while ($row = $result->fetch_assoc()) {
-    array_push($arrayResult, $row);
-  }
-}
-echo '<pre>';
-print_r($arrayResult[0]);
-echo '<pre>'; */

@@ -37,18 +37,43 @@ function mergeStringValues($rowContent, $columnsToMerge, $separator)
 // $rowContent
 // $column['rilievi]
 // $separator
-function prepareString($rowContent, $columnName, $separator)
+function prepareString($rowContent, $column, $columnName, $separator)
 {
-  if (is_array($columnName)) {
+  if (is_array($column[$columnName])) {
 
-    $stringToSearch = mergeStringValues($rowContent, $columnName, $separator);
+    $stringToSearch = mergeStringValues($rowContent, $column[$columnName] , $separator);
   } else {
-    if ($columnName == '') {
+    if ($column[$columnName] == '') {
       $stringToSearch = '';
     } else {
-      $stringToSearch = $rowContent[$columnName];
-      
+      $stringToSearch = $rowContent[$column[$columnName]];
     }
   }
   return $stringToSearch;
+}
+
+function addToSelectString($mysqli, $stringToSearch, $column, $columnName)
+{
+
+  if ($stringToSearch == '' or $column[$columnName] == '') {
+    $query = "{$mysqli->real_escape_string($column['name'])} IS NULL";
+  } else {
+    $query = "{$mysqli->real_escape_string($column['name'])} LIKE '{$mysqli->real_escape_string($stringToSearch)}'";
+  }
+
+  return $query;
+}
+
+
+function addToInsertString($mysqli, $stringToSearch, $column, $columnName)
+{
+  if ($stringToSearch == '' or $column[$columnName] == '') {
+
+    $queryInto = "{$mysqli->real_escape_string($column['name'])}";
+    $queryValues = 'NULL';
+  } else {
+    $queryInto = "{$mysqli->real_escape_string($column['name'])}";
+    $queryValues = "'{$mysqli->real_escape_string($stringToSearch)}'";
+  }
+  return [$queryInto, $queryValues];
 }
