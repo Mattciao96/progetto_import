@@ -31,6 +31,15 @@ class InsertModel
   {
     echo "<p>Database: {$_SESSION['dstoedit']} </p>";
 
+    // svuoto la tabella;
+    $table = $_SESSION['dstoedit'];
+
+    if ($table == 'dts' or $table == 'moderna' or $table == 'rilievi' or $table == 'source') {
+      $truncateQuery = "TRUNCATE `dolomiti`.`{$this->db->escapeString($table)}`";
+      $this->db->getInsertQuery($truncateQuery);
+    }
+    
+
     $counter = 0;
     foreach ($dataset as $row) {
 

@@ -165,6 +165,12 @@
             "moderna": "Secolo",
             "rilievi": "Secolo",
             "dts": "Secolo"
+          },
+          {
+            "name": "id_original",
+            "moderna": "ID",
+            "rilievi": "ID",
+            "dts": "idn"
           }
     ],
     "source" : [

@@ -2,8 +2,10 @@
 class HomeView extends View {
   private $title = 'Import home';
   private $content = '
-  <a href="dataset?procedure=upload&dstoedit=dts">Upload file DST</a>
-  <br><a href="dataset?procedure=upload&dstoedit=dts_test">Upload file ALTRO FILE</a>
+  <a href="dataset?procedure=upload&dstoedit=dts">Upload DTS</a>
+  <br><br><a href="dataset?procedure=upload&dstoedit=rilievi">Upload RILIEVI</a>
+  <br><br><a href="dataset?procedure=upload&dstoedit=moderna">Upload MODERNA</a>
+  <br><br><a href="dataset?procedure=upload&dstoedit=source">Upload SOURCE</a>
   ';
 
   public function getHomePage(){

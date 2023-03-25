@@ -51,7 +51,11 @@ $view = new View();
 
 
 if (isset($_REQUEST['procedure']) and $_REQUEST['procedure'] == 'upload') {
-  if (isset($_REQUEST['dstoedit']) and ($_REQUEST['dstoedit'] == 'dts' or $_REQUEST['dstoedit'] == 'dts_test')) {
+  if (isset($_REQUEST['dstoedit']) and ($_REQUEST['dstoedit'] == 'dts' 
+  or $_REQUEST['dstoedit'] == 'rilievi'
+  or $_REQUEST['dstoedit'] == 'moderna'
+  or $_REQUEST['dstoedit'] == 'source'
+)) {
     $_SESSION['dstoedit'] = $_REQUEST['dstoedit']; //butto in session
 
     require('../src/classes/upload/uploadView.php');
