@@ -12,6 +12,8 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 ini_set("memory_limit", "4096M");
+ini_set('post_max_size', '4096M');
+ini_set('upload_max_filesize', '4096M');
 
 // if a big json is sent through post, these values need to be changed in php.ini
 // max upload filesize (upload_max_filesize)
@@ -48,14 +50,15 @@ try {
 $view = new View();
 
 
+require('login_check.php');
 
 
 if (isset($_REQUEST['procedure']) and $_REQUEST['procedure'] == 'upload') {
-  if (isset($_REQUEST['dstoedit']) and ($_REQUEST['dstoedit'] == 'dts' 
-  or $_REQUEST['dstoedit'] == 'rilievi'
-  or $_REQUEST['dstoedit'] == 'moderna'
-  or $_REQUEST['dstoedit'] == 'source'
-)) {
+  if (isset($_REQUEST['dstoedit']) and ($_REQUEST['dstoedit'] == 'dts'
+    or $_REQUEST['dstoedit'] == 'rilievi'
+    or $_REQUEST['dstoedit'] == 'moderna'
+    or $_REQUEST['dstoedit'] == 'source'
+  )) {
     $_SESSION['dstoedit'] = $_REQUEST['dstoedit']; //butto in session
 
     require('../src/classes/upload/uploadView.php');

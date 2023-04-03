@@ -104,7 +104,7 @@ class InsertModel
     } else {
         // Log errors
         $error = "Error: " . $finalquery . "<br>" . mysqli_error($this->db->connect);
-        file_put_contents('error.log', $error . PHP_EOL, FILE_APPEND);
+        //file_put_contents('error.log', $error . PHP_EOL, FILE_APPEND);
         echo "<br><br>Error: " . $finalquery . "<br>" . mysqli_error($this->db->connect).'<br><br>';
     }
     

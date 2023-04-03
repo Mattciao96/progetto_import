@@ -12,7 +12,7 @@ include('functions.php');
 
 
 
-
+$database_name = 'dolomiti';
 // creo connessione al database
 $mysqli = new mysqli($database_adress, $database_login, $database_password, $database_name);
 
