@@ -1,7 +1,7 @@
 <?php
 
   $login = '
-  <form>
+  <form method="POST">
   <label for="usernameDolomiti">Username:</label>
   <input type="text" id="usernameDolomiti" name="usernameDolomiti" required><br><br>
 

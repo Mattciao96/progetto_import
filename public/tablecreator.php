@@ -80,6 +80,12 @@ if ($result->num_rows == 0) {
     echo $mysqli->error . '<br>';
   }
 } else {
+  $query = "ALTER TABLE rilievi MODIFY `ID` INT NOT NULL";
+  $result = $mysqli->query($query);
+  $query = "ALTER TABLE rilievi DROP COLUMN `ID`;";
+  $result = $mysqli->query($query);
+  $query = "ALTER TABLE rilievi ADD COLUMN `ID` INT AUTO_INCREMENT PRIMARY KEY FIRST";
+  $result = $mysqli->query($query);
   echo 'La colonna ID esiste già<br>';
 }
 
