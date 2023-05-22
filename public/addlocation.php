@@ -151,5 +151,5 @@ addlocation($mysqli, 'bacini_idro_princ_4326', ['main_drainage_basin'], ['nome_b
 addlocation($mysqli, 'bacini_idro_sec_4326', ['secondary_drainage_basin'], ['nome_bac']);
 addlocation($mysqli, 'soiusa_4326', ['soiusa_major_sector','soiusa_section','soiusa_subsection','soiusa_supergroup','soiusa_group'], 
 ['grande_set', 'sezione_sz', 'sottosezio', 'supergrupp', 'gruppo_gr']);
-addlocation($mysqli, 'natura_2000_4326', ['cod_natura_2000', 'natura_2000_name', 'sic_zsc', 'zps'], ['codice', 'denominaz', 'sic_zsc', 'zps']);
+addlocation($mysqli, 'natura_2000_4326', ['cod_natura_2000', 'natura_2000_name', 'sic_zsc', 'zps'], ['codice', 'denominazi', 'sic_zsc', 'zps']);
 
