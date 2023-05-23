@@ -15,7 +15,7 @@ mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 $mysqli = new mysqli($database_adress, $database_login, $database_password, $database_name);
 
 
-$query = "CREATE TABLE IF NOT EXISTS herbaria_in_dolomites (
+$query = "CREATE TABLE IF NOT EXISTS dolomiti.herbaria_in_dolomites (
   id INT AUTO_INCREMENT,
   occurrence_id INT,
   in_study_area BOOLEAN,
