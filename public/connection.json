@@ -167,6 +167,12 @@
       "dts": "Secolo"
     },
     {
+      "name": "data_type",
+      "moderna": "Tipo di dato",
+      "rilievi": "Tipo di dato",
+      "dts": "Tipo di dato"
+    },
+    {
       "name": "id_original",
       "moderna": "ID",
       "rilievi": "ID",

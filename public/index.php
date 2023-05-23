@@ -58,6 +58,7 @@ if (isset($_REQUEST['procedure']) and $_REQUEST['procedure'] == 'upload') {
     or $_REQUEST['dstoedit'] == 'rilievi'
     or $_REQUEST['dstoedit'] == 'moderna'
     or $_REQUEST['dstoedit'] == 'source'
+    or $_REQUEST['dstoedit'] == 'translation'
   )) {
     $_SESSION['dstoedit'] = $_REQUEST['dstoedit']; //butto in session
 
