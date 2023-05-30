@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 ini_set("memory_limit", "4096M");
 
 require_once('../config/init.php');
-
+$database_name = 'dolomiti';
 // script per dividere il campo quota in quota min e max
 
 // creo connessione al database
