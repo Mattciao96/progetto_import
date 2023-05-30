@@ -84,10 +84,11 @@ if ($result->num_rows > 0) {
 // se è presente il simbolo <, aggiungi valore alla colonna max elevation
 // se è presente il simbolo -, aggiungi prima serie di numeri trovati alla colonna min, seconda serie di numeri trovati alla colonna max
 foreach ($arrayResult as $string) {
+  $string = trim($string);
   $stringa = $string;
   if (preg_match('/^[0-9]+$/', $string)) {
     $string = (int) $string;
-    $query = "UPDATE location SET minimumElevationInMeters = '{$mysqli->real_escape_string($string)}' 
+    $query = "UPDATE location SET minimumElevationInMeters = '{$mysqli->real_escape_string($string)}', maximumElevationInMeters = '{$mysqli->real_escape_string($string)}' 
     WHERE verbatimElevation LIKE '{$mysqli->real_escape_string($stringa)}'";
       echo $query;
         $result = $mysqli->query($query);
@@ -99,7 +100,7 @@ foreach ($arrayResult as $string) {
   } elseif (preg_match('/>/', $string)) {
     preg_match('/\d+/', $string, $matches);
     $number = $matches[0];
-    $query = "UPDATE location SET minimumElevationInMeters = '$number' 
+    $query = "UPDATE location SET minimumElevationInMeters = '$number', maximumElevationInMeters = '$number' 
     WHERE verbatimElevation LIKE '{$mysqli->real_escape_string($stringa)}'";
       echo $query;
         $result = $mysqli->query($query);
@@ -111,7 +112,7 @@ foreach ($arrayResult as $string) {
   } elseif (preg_match('/</', $string)) {
         preg_match('/\d+/', $string, $matches);
         $number = $matches[0];
-        $query = "UPDATE location SET maximumElevationInMeters = '$number' 
+        $query = "UPDATE location SET maximumElevationInMeters = '$number', minimumElevationInMeters = '$number' 
         WHERE verbatimElevation LIKE '{$mysqli->real_escape_string($stringa)}'";
           echo $query;
             $result = $mysqli->query($query);
