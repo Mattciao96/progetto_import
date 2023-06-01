@@ -67,7 +67,7 @@ if ($result->num_rows == 0) {
 
 
 
-// Seleziono valori univoci della colonna verbatimElevation in tabella Record
+// Seleziono valori univoci della colonna verbatimElevation in tabella location
 $query = "SELECT DISTINCT verbatimElevation FROM location WHERE verbatimElevation IS NOT NULL";
 $result = $mysqli->query($query);
 
@@ -79,7 +79,7 @@ if ($result->num_rows > 0) {
 }
 
 // per ciascun valore univoco:
-// se sono presenti solo valori numerici, aggiungi valore alla colonna min elevation nei record corrispondenti
+// se sono presenti solo valori numerici, aggiungi valore alle colonne min e max elevation nei record corrispondenti
 // se è presente il simbolo >, aggiungi valore alla colonna min elevation
 // se è presente il simbolo <, aggiungi valore alla colonna max elevation
 // se è presente il simbolo -, aggiungi prima serie di numeri trovati alla colonna min, seconda serie di numeri trovati alla colonna max
@@ -100,7 +100,7 @@ foreach ($arrayResult as $string) {
   } elseif (preg_match('/>/', $string)) {
     preg_match('/\d+/', $string, $matches);
     $number = $matches[0];
-    $query = "UPDATE location SET minimumElevationInMeters = '$number', maximumElevationInMeters = '$number' 
+    $query = "UPDATE location SET minimumElevationInMeters = '$number' 
     WHERE verbatimElevation LIKE '{$mysqli->real_escape_string($stringa)}'";
       echo $query;
         $result = $mysqli->query($query);
@@ -112,7 +112,7 @@ foreach ($arrayResult as $string) {
   } elseif (preg_match('/</', $string)) {
         preg_match('/\d+/', $string, $matches);
         $number = $matches[0];
-        $query = "UPDATE location SET maximumElevationInMeters = '$number', minimumElevationInMeters = '$number' 
+        $query = "UPDATE location SET maximumElevationInMeters = '$number' 
         WHERE verbatimElevation LIKE '{$mysqli->real_escape_string($stringa)}'";
           echo $query;
             $result = $mysqli->query($query);
@@ -135,7 +135,7 @@ foreach ($arrayResult as $string) {
         echo $mysqli->error . '<br>';
       }
   } else {
-    echo 'Condizione non presente per: '.'real_escape_string($stringa)'.'<br>';
+    echo 'Condizione non presente per: '. $stringa .'<br>';
   }
 }
 
