@@ -91,3 +91,26 @@ function isInStudyArea($mysqli)
 }
 
 isInStudyArea($mysqli);
+
+// crea la tabella per i dati
+try {
+  $query = "DROP TABLE dolomiti.HB_dati_dol";
+  $result = $mysqli->query($query);
+  if ($result) {
+    echo 'Tabella tutto ok<br>';
+  } else {
+    echo $mysqli->error . '<br>';
+  }
+} catch (Error $e) {
+  echo 'no problem ora creo la tablella';
+}
+$query = "CREATE TABLE dolomiti.HB_dati_dol AS
+SELECT italic.HB_dati.*
+FROM italic.HB_dati
+JOIN dolomiti.herbaria_in_dolomites ON dolomiti.herbaria_in_dolomites.occurrence_id = italic.HB_dati.table_id";
+$result = $mysqli->query($query);
+if ($result) {
+  echo 'Tabella tutto ok<br>';
+} else {
+  echo $mysqli->error . '<br>';
+}
