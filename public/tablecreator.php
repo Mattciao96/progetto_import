@@ -265,3 +265,4 @@ foreach ($tables as $table) {
     }
   }
 }
+exit;
