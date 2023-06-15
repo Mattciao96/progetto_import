@@ -114,3 +114,43 @@ if ($result) {
 } else {
   echo $mysqli->error . '<br>';
 }
+
+$query = "ALTER TABLE dolomiti.herbaria_in_dolomites ADD COLUMN data_type VARCHAR(255) DEFAULT 'Herbaria'";
+$result = $mysqli->query($query);
+if ($result) {
+  echo 'data_type created<br>';
+} else {
+  echo $mysqli->error . '<br>';
+}
+
+// add indexes herbaria_in_dolomites
+$query = "ALTER TABLE dolomiti.`herbaria_in_dolomites` ADD INDEX(`occurrence_id`)";
+$result = $mysqli->query($query);
+if ($result) {
+  echo 'occurrence_id indexed<br>';
+} else {
+  echo $mysqli->error . '<br>';
+}
+
+// add indexes HB_dati_dol
+$query = "ALTER TABLE dolomiti.`HB_dati_dol` ADD INDEX(`table_id`)";
+$result = $mysqli->query($query);
+if ($result) {
+  echo 'table_id indexed<br>';
+} else {
+  echo $mysqli->error . '<br>';
+}
+$query = "ALTER TABLE dolomiti.`HB_dati_dol` ADD INDEX(`herbarium_id`)";
+$result = $mysqli->query($query);
+if ($result) {
+  echo 'table_id indexed<br>';
+} else {
+  echo $mysqli->error . '<br>';
+}
+$query = "ALTER TABLE dolomiti.`HB_dati_dol` ADD INDEX(`nome_accettato`)";
+$result = $mysqli->query($query);
+if ($result) {
+  echo 'nome_accettato indexed<br>';
+} else {
+  echo $mysqli->error . '<br>';
+}
