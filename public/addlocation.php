@@ -12,6 +12,7 @@ require_once('../config/init.php');
 mysqli_report(MYSQLI_REPORT_ERROR|MYSQLI_REPORT_STRICT);
 
 // creo connessione al database
+$database_name = 'dolomiti';
 $mysqli = new mysqli($database_adress, $database_login, $database_password, $database_name);
 
 
