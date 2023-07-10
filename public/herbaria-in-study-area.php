@@ -91,3 +91,66 @@ function isInStudyArea($mysqli)
 }
 
 isInStudyArea($mysqli);
+
+// crea la tabella per i dati
+try {
+  $query = "DROP TABLE dolomiti.HB_dati_dol";
+  $result = $mysqli->query($query);
+  if ($result) {
+    echo 'Tabella tutto ok<br>';
+  } else {
+    echo $mysqli->error . '<br>';
+  }
+} catch (Error $e) {
+  echo 'no problem ora creo la tablella';
+}
+$query = "CREATE TABLE dolomiti.HB_dati_dol AS
+SELECT italic.HB_dati.*
+FROM italic.HB_dati
+JOIN dolomiti.herbaria_in_dolomites ON dolomiti.herbaria_in_dolomites.occurrence_id = italic.HB_dati.table_id";
+$result = $mysqli->query($query);
+if ($result) {
+  echo 'Tabella tutto ok<br>';
+} else {
+  echo $mysqli->error . '<br>';
+}
+
+$query = "ALTER TABLE dolomiti.herbaria_in_dolomites ADD COLUMN data_type VARCHAR(255) DEFAULT 'Herbaria'";
+$result = $mysqli->query($query);
+if ($result) {
+  echo 'data_type created<br>';
+} else {
+  echo $mysqli->error . '<br>';
+}
+
+// add indexes herbaria_in_dolomites
+$query = "ALTER TABLE dolomiti.`herbaria_in_dolomites` ADD INDEX(`occurrence_id`)";
+$result = $mysqli->query($query);
+if ($result) {
+  echo 'occurrence_id indexed<br>';
+} else {
+  echo $mysqli->error . '<br>';
+}
+
+// add indexes HB_dati_dol
+$query = "ALTER TABLE dolomiti.`HB_dati_dol` ADD INDEX(`table_id`)";
+$result = $mysqli->query($query);
+if ($result) {
+  echo 'table_id indexed<br>';
+} else {
+  echo $mysqli->error . '<br>';
+}
+$query = "ALTER TABLE dolomiti.`HB_dati_dol` ADD INDEX(`herbarium_id`)";
+$result = $mysqli->query($query);
+if ($result) {
+  echo 'table_id indexed<br>';
+} else {
+  echo $mysqli->error . '<br>';
+}
+$query = "ALTER TABLE dolomiti.`HB_dati_dol` ADD INDEX(`nome_accettato`)";
+$result = $mysqli->query($query);
+if ($result) {
+  echo 'nome_accettato indexed<br>';
+} else {
+  echo $mysqli->error . '<br>';
+}
