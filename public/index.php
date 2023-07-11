@@ -57,6 +57,7 @@ if (isset($_REQUEST['procedure']) and $_REQUEST['procedure'] == 'upload') {
   if (isset($_REQUEST['dstoedit']) and ($_REQUEST['dstoedit'] == 'dts'
     or $_REQUEST['dstoedit'] == 'rilievi'
     or $_REQUEST['dstoedit'] == 'moderna'
+    or $_REQUEST['dstoedit'] == 'erbari'
     or $_REQUEST['dstoedit'] == 'source'
     or $_REQUEST['dstoedit'] == 'translation'
   )) {

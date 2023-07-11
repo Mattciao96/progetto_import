@@ -111,7 +111,7 @@ $columnsData = $jsonData['location'];
 
 
 
-$tables = ['rilievi','moderna', 'dts'];
+$tables = ['rilievi','moderna', 'dts', 'erbari'];
 
 foreach ($tables as $table) {
   echo $table . '__________________________________________________________________________________________________________<br><br>';
