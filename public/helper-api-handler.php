@@ -113,6 +113,10 @@ function fillInaturalistDatabase($mysqli, $data)
 
 function insertInaturalistData($mysqli, $row)
 {
+  $row['positional_accuracy'] = $row['positional_accuracy'] == null ? 'NULL' : $row['positional_accuracy'];
+  $row['latitude'] = $row['latitude'] == null ? 'NULL' : $row['latitude'];
+  $row['longitude'] = $row['longitude'] == null ? 'NULL' : $row['longitude'];
+
   $query = "INSERT INTO `inaturalist_data`(`id`, `name`, `observed_on`, `latitude`, `longitude`, `positional_accuracy`, `positioning_method`, `place_guess`, `user_login`, `thumb_url`, `large_url`) 
   VALUES 
   ({$mysqli->real_escape_string($row['id'])},
@@ -127,6 +131,7 @@ function insertInaturalistData($mysqli, $row)
   '{$mysqli->real_escape_string($row['photos'][0]['thumb_url'])}',
   '{$mysqli->real_escape_string($row['photos'][0]['large_url'])}')";
 
+  echo $query;
   $result = $mysqli->query($query);
   if ($result) {
     echo 'Inserito<br>';
