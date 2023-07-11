@@ -62,7 +62,7 @@ function isInStudyArea($mysqli)
   foreach ($arrayResult as $key => $row) {
 
     $query = "SELECT id
-    FROM dolomiti.extended_area
+    FROM dolomiti.area_buffer
               WHERE
               ST_CONTAINS(SHAPE, ST_GEOMFROMTEXT(
                             CONCAT(

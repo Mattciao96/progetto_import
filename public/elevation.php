@@ -121,7 +121,7 @@ foreach ($arrayResult as $string) {
           } else {
             echo $mysqli->error . '<br>';
           }
-  } elseif (preg_match('/-/', $string)) {
+  } elseif (preg_match('/[(-|\/]/', $string)) {
     preg_match_all('/\d+/', $string, $matches);
     $number = $matches[0];
     $query = "UPDATE location SET minimumElevationInMeters = '$number[0]', 

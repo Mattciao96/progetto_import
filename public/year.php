@@ -80,7 +80,7 @@ if ($result->num_rows > 0) {
 
 // per ciascun valore univoco:
 // se sono presenti solo valori numerici, aggiungi valore alle colonne start e end year nei record corrispondenti
-// se è presente il simbolo /, aggiungi prima serie di numeri trovati alla colonna start, seconda serie di numeri trovati alla colonna end
+// se è presente il simbolo / o \ o -, aggiungi prima serie di numeri trovati alla colonna start, seconda serie di numeri trovati alla colonna end
 foreach ($arrayResult as $string) {
   $string = trim($string);
   $stringa = $string;
@@ -95,7 +95,7 @@ foreach ($arrayResult as $string) {
       } else {
         echo $mysqli->error . '<br>';
       }
-  } elseif (preg_match('/\//', $string)) {
+  } elseif (preg_match('/[(-|\/]/', $string)) {
     preg_match_all('/\d+/', $string, $matches);
     $number = $matches[0];
     $query = "UPDATE record SET start_year = '$number[0]', 
