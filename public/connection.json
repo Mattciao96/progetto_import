@@ -5,97 +5,113 @@
       "moderna": "Località originale",
       "rilievi": ["Sito", "Località"],
       "dts": "Località originale",
+      "erbari": "Località originale",
       "separator": "; "
     },
     {
       "name": "habitat",
       "moderna": "Habitat originale",
       "rilievi": "Habitat originale",
-      "dts": "Habitat originale"
+      "dts": "Habitat originale",
+      "erbari": "Habitat originale"
     },
     {
       "name": "country",
       "moderna": "",
       "rilievi": "",
-      "dts": ""
+      "dts": "",
+      "erbari": ""
     },
     {
       "name": "countryCode",
       "moderna": "",
       "rilievi": "",
-      "dts": ""
+      "dts": "",
+      "erbari": ""
     },
     {
       "name": "stateProvince",
       "moderna": "",
       "rilievi": "Regione",
-      "dts": ""
+      "dts": "",
+      "erbari": "Regione"
     },
     {
       "name": "county",
       "moderna": "",
       "rilievi": "Provincia",
-      "dts": ""
+      "dts": "",
+      "erbari": "Provincia"
     },
     {
       "name": "dem_elevation",
       "moderna": "Quota_DEM",
       "rilievi": "Quota_DEM",
-      "dts": "Quota_DEM"
+      "dts": "Quota_DEM",
+      "erbari": "Quota_DEM"
     },
     {
       "name": "verbatimElevation",
       "moderna": "Altitudine",
       "rilievi": "Quota (m slm)",
-      "dts": "Altitudine"
+      "dts": "Altitudine",
+      "erbari": "Altitudine originale"
     },
     {
       "name": "decimalLatitude",
       "moderna": "DECIMAL_y",
       "rilievi": "WGS84_N",
-      "dts": "DECIMAL_y"
+      "dts": "DECIMAL_y",
+      "erbari": "DECIMAL_y"
     },
     {
       "name": "decimalLongitude",
       "moderna": "DECIMAL_x",
       "rilievi": "WGS84_E",
-      "dts": "DECIMAL_x"
+      "dts": "DECIMAL_x",
+      "erbari": "DECIMAL_x"
     },
     {
       "name": "geodeticDatum",
       "moderna": "",
       "rilievi": "",
-      "dts": ""
+      "dts": "",
+      "erbari": ""
     },
     {
       "name": "coordinatesUncertaintyInMeters",
       "moderna": "Incertezza",
       "rilievi": "Incertezza m",
-      "dts": "Incertezza"
+      "dts": "Incertezza",
+      "erbari": "Incertezza"
     },
     {
       "name": "georeferenceRemarks",
       "moderna": "Note di georeferenziazione",
       "rilievi": "",
-      "dts": "Note di georeferenziazione"
+      "dts": "Note di georeferenziazione",
+      "erbari": "Note di georeferenziazione"
     },
     {
       "name": "coordinates_attribution",
       "moderna": "Attribuzione coordinate",
       "rilievi": "Modalità di attribuzione delle coordinate",
-      "dts": "Attribuzione coordinate"
+      "dts": "Attribuzione coordinate",
+      "erbari": "Attribuzione coordinate"
     },
     {
       "name": "belt",
       "moderna": "Fascia",
       "rilievi": "",
-      "dts": "Fascia"
+      "dts": "Fascia",
+      "erbari": "Fascia"
     },
     {
       "name": "id_plot",
       "moderna": "",
       "rilievi": "id plot",
-      "dts": ""
+      "dts": "",
+      "erbari": ""
     }
   ],
   "record": [
@@ -103,80 +119,136 @@
       "name": "verbatimIdentification",
       "moderna": "Nome originale",
       "rilievi": "Nome originale",
-      "dts": "Nome originale"
+      "dts": "Nome originale",
+      "erbari": "Nome originale"
     },
     {
       "name": "scientificName",
       "moderna": "Nome corrente",
       "rilievi": "Nome corrente",
-      "dts": "Nome corrente"
+      "dts": "Nome corrente",
+      "erbari": "Nome corrente"
     },
     {
       "name": "verbatim_substratum",
       "moderna": "Substrato originale",
       "rilievi": "Substrato originale",
-      "dts": "Substrato originale"
+      "dts": "Substrato originale",
+      "erbari": "Substrato originale"
     },
     {
       "name": "substratum",
       "moderna": "Substrato",
       "rilievi": "Substrato",
-      "dts": "Substrato"
+      "dts": "Substrato",
+      "erbari": "Substrato"
     },
     {
       "name": "specific_substratum",
       "moderna": ["Forofita", "Roccia madre"],
       "rilievi": ["Litologia", "Specie arborea"],
       "dts": ["Forofita", "Roccia madre"],
-      "separator": "; "
+      "separator": "; ",
+      "erbari": ["Forofita", "Roccia madre"]
     },
     {
       "name": "recordedBy",
       "moderna": "Legit",
-      "rilievi": "",
-      "dts": "Legit"
+      "rilievi": "Legit",
+      "dts": "Legit",
+      "erbari": "Legit"
     },
     {
       "name": "identifiedBy",
       "moderna": "Determinavit",
-      "rilievi": "",
-      "dts": "Determinavit"
+      "rilievi": "Determinavit",
+      "dts": "Determinavit",
+      "erbari": "Determinavit"
     },
     {
       "name": "verbatimEventDate",
       "moderna": "Data",
       "rilievi": "Data",
-      "dts": "Data"
+      "dts": "Data",
+      "erbari": "Data raccolta"
     },
     {
       "name": "eventDate",
       "moderna": "",
       "rilievi": "",
-      "dts": ""
+      "dts": "",
+      "erbari": ""
     },
     {
       "name": "year",
       "moderna": "Anno",
       "rilievi": "Periodo",
-      "dts": "Anno"
+      "dts": "Anno",
+      "erbari": "Anno raccolta"
     },
     {
       "name": "century",
       "moderna": "Secolo",
       "rilievi": "Secolo",
-      "dts": "Secolo"
+      "dts": "Secolo",
+      "erbari": "Secolo"
     },
     {
       "name": "data_type",
       "moderna": "Tipo di dato",
       "rilievi": "Tipo di dato",
-      "dts": "Tipo di dato"
+      "dts": "Tipo di dato",
+      "erbari": "Tipo di dato"
+    },
+    {
+      "name": "organismQuantity",
+      "moderna": "",
+      "rilievi": "Abbondanza",
+      "dts": "",
+      "erbari": "N campioni"
+    },
+    {
+      "name": "organismQuantityType",
+      "moderna": "",
+      "rilievi": "Modalità di espressione delle abbondanze",
+      "dts": "",
+      "erbari": "organismQuantityType"
+    },
+    {
+      "name": "specimenID",
+      "moderna": "",
+      "rilievi": "",
+      "dts": "",
+      "erbari": "ID campione"
+    },
+    {
+      "name": "occurrenceRemarks",
+      "moderna": ["Note: tipi", "Note: altro", "Note: rif. Arnold"],
+      "rilievi": "Note",
+      "dts": ["Note: tipi", "Note: altro", "Note_ rif. Arnold"],
+      "erbari": ["Note: tipi", "Note: altro", "Exsiccata"],
+      "separator": "; "
+    },
+    {
+      "name": "identificationReferences",
+      "moderna": "",
+      "rilievi": "",
+      "dts": "",
+      "erbari": "Revisore"
+    },
+    {
+      "name": "new_identification",
+      "moderna": "",
+      "rilievi": "",
+      "dts": "",
+      "erbari": "Nuova identificazione"
     },
     {
       "name": "id_original",
       "moderna": "ID",
       "rilievi": "ID",
-      "dts": "idn"
+      "dts": "idn",
+      "erbari": "ID"
     }
   ],
   "source": [
@@ -184,49 +256,57 @@
       "name": "id_source",
       "moderna": "",
       "rilievi": "",
-      "dts": ""
+      "dts": "",
+      "erbari": ""
     },
     {
       "name": "source_type",
       "moderna": "",
       "rilievi": "",
-      "dts": ""
+      "dts": "",
+      "erbari": ""
     },
     {
       "name": "short_source",
       "moderna": "Fonte abbreviata",
       "rilievi": "Fonte bibliografica abbreviata",
-      "dts": "Fonte"
+      "dts": "Fonte",
+      "erbari": "Fonte abbreviata"
     },
     {
       "name": "associatedReferences",
       "moderna": "",
       "rilievi": "",
-      "dts": ""
+      "dts": "",
+      "erbari": ""
     },
     {
       "name": "source_title",
       "moderna": "",
       "rilievi": "",
-      "dts": ""
+      "dts": "",
+      "erbari": ""
     },
     {
       "name": "author",
       "moderna": "",
       "rilievi": "",
-      "dts": ""
+      "dts": "",
+      "erbari": ""
     },
     {
       "name": "source_year",
       "moderna": "",
       "rilievi": "",
-      "dts": ""
+      "dts": "",
+      "erbari": ""
     },
     {
       "name": "source_century",
       "moderna": "",
       "rilievi": "",
-      "dts": ""
+      "dts": "",
+      "erbari": ""
     }
   ]
 }
